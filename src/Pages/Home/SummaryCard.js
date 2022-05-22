@@ -11,10 +11,7 @@ const SummaryCard = ({ summary }) => {
   return (
     <ReactVisibilitySensor
     offset={{top: 300}}
-      onChange={() => {
-        setInViewport(!inViewport);
-        setActive(false);
-      }}
+      onChange={() => setInViewport(!inViewport)}
     >
       <div className="text-center summary-card bg-gray-100 shadow-lg hover:shadow-xl py-6 rounded-3xl cursor-pointer hover:bg-primary duration-500 hover:text-white">
         <FontAwesomeIcon

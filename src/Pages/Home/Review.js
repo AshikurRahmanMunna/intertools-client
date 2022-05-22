@@ -6,10 +6,15 @@ import "./Review.css";
 
 const Review = ({ review, spacing }) => {
   const { name, img, desc, rating } = review;
+  console.log(name.length);
   return (
     <div className={`review-card ${spacing}`}>
-      <img className="mx-auto" src={img} alt={name} />
-      <h5>{name}</h5>
+      <div class="avatar">
+        <div class="w-24 rounded-full">
+          <img src={img} alt={name} />
+        </div>
+      </div>
+      <h4 className="text-2xl mb-2">{name}</h4>
       <p>
         <small>{desc}</small>
       </p>

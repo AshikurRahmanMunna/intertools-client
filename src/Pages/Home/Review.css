@@ -1,9 +1,9 @@
 .review-card {
-    background: white;
+    background: #f5f5f5;
     text-align: center;
     border-radius: 10px;
     padding: 20px;
-    height: 350px;
+    height: 320px;
 }
 .review-card img {
     width: 100px;

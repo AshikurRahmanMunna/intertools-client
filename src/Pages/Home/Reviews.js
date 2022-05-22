@@ -51,10 +51,10 @@ const Reviews = () => {
   }, []);
   return (
     <div className="my-5">
-      <h2 className="text-center">
+      <h2 className="text-center text-4xl mt-8 mb-2">
         Customer <span className="text-primary">Reviews</span>
       </h2>
-      <div className="container mx-auto">
+      <div className="container mx-auto px-12">
         <Slider {...settings}>
           {reviews.map((review) => (
             <Review key={review._id} review={review}></Review>
