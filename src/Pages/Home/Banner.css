@@ -1,0 +1,4 @@
+.react-parallax-bgimage {
+    object-fit: cover;
+    filter: brightness(.4) !important;
+}

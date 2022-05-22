@@ -1,52 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
-const Navbar = ({children}) => {
+const Navbar = () => {
+  const [white, setWhite] = useState(false);
+  const navItems = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <Link to="/#tools">Tools</Link>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+    </>
+  );
+  const changeNavbarColor = () => {
+    if(window.scrollY > 150) {
+      setWhite(true)
+    }
+    else {
+      setWhite(false);
+    }
+  }
+  window.addEventListener('scroll', changeNavbarColor);
+  console.log(white);
   return (
-    <div class="drawer">
-      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col">
-        <div class="w-full navbar bg-base-300">
-          <div class="flex-none lg:hidden">
-            <label for="my-drawer-3" class="btn btn-square btn-ghost">
+    <div class={`navbar bg-base-100 fixed duration-500 top-0 ${white ? 'bg-white text-black' : 'bg-transparent text-white'} z-10`}>
+      <div className="container mx-auto">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <label tabindex="0" class="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="inline-block w-6 h-6 stroke-current"
+                stroke="currentColor"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
               </svg>
             </label>
-          </div>
-          <div class="flex-1 px-2 mx-2">Navbar Title</div>
-          <div class="flex-none hidden lg:block">
-            <ul class="menu menu-horizontal">
-              <li>
-                <a>Navbar Item 1</a>
-              </li>
-              <li>
-                <a>Navbar Item 2</a>
-              </li>
+            <ul
+              tabindex="0"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              {navItems}
             </ul>
           </div>
+          <a class="btn btn-ghost normal-case text-xl">Intertools</a>
         </div>
-        {children}
-      </div>
-      <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
-        </ul>
+        <div class="navbar-end hidden lg:flex">
+          <ul class="menu menu-horizontal p-0">{navItems}</ul>
+        </div>
       </div>
     </div>
   );
