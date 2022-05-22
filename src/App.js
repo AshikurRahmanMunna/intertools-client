@@ -4,15 +4,17 @@ import Navbar from "./components/Navbar";
 import Home from "./Pages/Home/Home";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
       </Routes>
-    </div>
+      <Footer />
+    </>
   );
 }
 
