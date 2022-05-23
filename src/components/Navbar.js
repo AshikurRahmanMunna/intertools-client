@@ -49,7 +49,7 @@ const Navbar = () => {
             </label>
             <ul
               tabindex="0"
-              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 gap-5"
             >
               {navItems}
             </ul>
@@ -57,7 +57,7 @@ const Navbar = () => {
           <a class="btn btn-ghost normal-case text-xl">Intertools</a>
         </div>
         <div class="navbar-end hidden lg:flex">
-          <ul class="menu menu-horizontal p-0">{navItems}</ul>
+          <ul class="menu menu-horizontal p-0 gap-5">{navItems}</ul>
         </div>
       </div>
     </div>
