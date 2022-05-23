@@ -1,12 +1,22 @@
 import { faEnvelope, faMapMarkerAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
+  const [hideFooter, setHideFooter] = useState(false);
+  const location = useLocation();
+  useEffect(() => {
+    if(location.pathname === '/login') {
+      setHideFooter(true);
+    }
+    else {
+      setHideFooter(false);
+    }
+  }, [location])
   return (
-    <div>
+    <div className={hideFooter && 'hidden'}>
       <div>
         <svg
           class="waves"

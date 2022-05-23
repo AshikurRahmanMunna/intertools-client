@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [white, setWhite] = useState(false);
+  const [hideNavbar, setHideNavbar] = useState(false);
+  const location = useLocation();
   const navItems = (
     <>
       <li>
@@ -24,10 +26,18 @@ const Navbar = () => {
       setWhite(false);
     }
   }
+
+  useEffect(() => {
+    if(location.pathname === '/login') {
+      setHideNavbar(true);
+    }
+    else {
+      setHideNavbar(false);
+    }
+  }, [location])
   window.addEventListener('scroll', changeNavbarColor);
-  console.log(white);
   return (
-    <div class={`navbar bg-base-100 fixed duration-500 top-0 ${white ? 'bg-white text-black' : 'bg-transparent text-white'} z-10`}>
+    <div class={`navbar bg-base-100 ${hideNavbar && 'hidden'} fixed duration-500 top-0 ${white ? 'bg-white text-black' : 'bg-transparent text-white'} z-10`}>
       <div className="container mx-auto">
         <div class="navbar-start">
           <div class="dropdown">
@@ -54,7 +64,7 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <a class="btn btn-ghost normal-case text-xl">Intertools</a>
+          <Link to="/" class="btn btn-ghost normal-case font-lobster text-3xl">Inter<span className="text-primary font-lobster">tools</span></Link>
         </div>
         <div class="navbar-end hidden lg:flex">
           <ul class="menu menu-horizontal p-0 gap-5">{navItems}</ul>

@@ -6,7 +6,6 @@ import "./Review.css";
 
 const Review = ({ review, spacing }) => {
   const { name, img, desc, rating } = review;
-  console.log(name.length);
   return (
     <div className={`review-card ${spacing}`}>
       <div class="avatar">
