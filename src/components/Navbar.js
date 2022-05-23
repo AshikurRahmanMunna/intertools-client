@@ -28,7 +28,10 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    if(location.pathname === '/login') {
+    if(
+      location.pathname === '/login' ||
+      location.pathname === '/register'
+      ) {
       setHideNavbar(true);
     }
     else {
