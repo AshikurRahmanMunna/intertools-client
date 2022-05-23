@@ -1,18 +1,36 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import banner from "../../assets/images/login-banner.png";
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
 
 const Login = () => {
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || '/';
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  let errorElement;
+  if(error) {
+    errorElement = <p className="text-red-600">{error?.message}</p>
+  }
   const handleLogin = (data) => {
     const {email, password} = data;
-    
+    signInWithEmailAndPassword(email, password);
   };
+  if(user) {
+    navigate(from, {replace: true});
+  }
   return (
     <div className="min-h-screen mx-auto container flex items-center justify-center">
       <div className="bg-secondary w-[800px] p-10 rounded-2xl flex items-center justify-center py-16">
@@ -73,6 +91,8 @@ const Login = () => {
               className="btn block w-full btn-primary text-white"
             />
           </form>
+          {errorElement}
+          <p className="pt-3">Already have an account? <Link to="/register" className="text-primary">Register</Link></p>
         </div>
       </div>
     </div>
