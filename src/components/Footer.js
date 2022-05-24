@@ -8,7 +8,10 @@ const Footer = () => {
   const [hideFooter, setHideFooter] = useState(false);
   const location = useLocation();
   useEffect(() => {
-    if(location.pathname === '/login') {
+    if(
+      location.pathname === '/login' ||
+      location.pathname === '/register'
+      ) {
       setHideFooter(true);
     }
     else {

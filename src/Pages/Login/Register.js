@@ -4,14 +4,17 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import banner from "../../assets/images/login-banner.png";
 import {
   useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../components/Loading";
-import { updateProfile } from "firebase/auth";
+import useToken from "../../hooks/useToken";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating, errorUpdating] = useUpdateProfile(auth);
+  const [token] = useToken(user);
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
@@ -27,12 +30,11 @@ const Register = () => {
   if (loading) {
     return <Loading></Loading>;
   }
-  const handleRegister = async(data) => {
-    const { email, password, name } = data;
-    await createUserWithEmailAndPassword(email, password);
-    await updateProfile({ displayName: name });
+  const handleRegister = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
   };
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
   }
   return (

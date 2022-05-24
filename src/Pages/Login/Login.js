@@ -5,6 +5,7 @@ import banner from "../../assets/images/login-banner.png";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from "../../firebase.init";
 import Loading from "../../components/Loading";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const [
@@ -13,6 +14,7 @@ const Login = () => {
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
+  const [token] = useToken(user);
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/';
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ const Login = () => {
     const {email, password} = data;
     signInWithEmailAndPassword(email, password);
   };
-  if(user) {
+  if(token) {
     navigate(from, {replace: true});
   }
   return (

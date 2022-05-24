@@ -1,10 +1,14 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import auth from "../firebase.init";
 
 const Navbar = () => {
   const [white, setWhite] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
   const location = useLocation();
+  const [user, loading, error] = useAuthState(auth);
   const navItems = (
     <>
       <li>
@@ -13,34 +17,52 @@ const Navbar = () => {
       <li>
         <Link to="/#tools">Tools</Link>
       </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
-      </li>
+      {user ? (
+        <button
+          onClick={() => {
+            signOut(auth);
+            localStorage.removeItem("accessToken");
+          }}
+          className="btn btn-secondary"
+        >
+          Sign Out
+        </button>
+      ) : (
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+      )}
     </>
   );
   const changeNavbarColor = () => {
-    if(window.scrollY > 150) {
-      setWhite(true)
+    if (location.pathname === "/") {
+      if (window.scrollY > 150) {
+        setWhite(true);
+      } else {
+        setWhite(false);
+      }
     }
     else {
-      setWhite(false);
+      setWhite(true);
     }
-  }
+  };
 
   useEffect(() => {
-    if(
-      location.pathname === '/login' ||
-      location.pathname === '/register'
-      ) {
+    if (location.pathname === "/login" || location.pathname === "/register") {
       setHideNavbar(true);
-    }
-    else {
+    } else {
       setHideNavbar(false);
     }
-  }, [location])
-  window.addEventListener('scroll', changeNavbarColor);
+  }, [location]);
+  window.addEventListener("scroll", changeNavbarColor);
   return (
-    <div class={`navbar bg-base-100 ${hideNavbar && 'hidden'} fixed duration-500 top-0 ${white ? 'bg-white text-black' : 'bg-transparent text-white'} z-10`}>
+    <div
+      class={`navbar bg-base-100 ${
+        hideNavbar && "hidden"
+      } fixed duration-500 top-0 ${
+        white ? "bg-white text-black" : "bg-transparent text-white"
+      } z-10`}
+    >
       <div className="container mx-auto">
         <div class="navbar-start">
           <div class="dropdown">
@@ -67,7 +89,9 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <Link to="/" class="btn btn-ghost normal-case font-lobster text-3xl">Inter<span className="text-primary font-lobster">tools</span></Link>
+          <Link to="/" class="btn btn-ghost normal-case font-lobster text-3xl">
+            Inter<span className="text-primary font-lobster">tools</span>
+          </Link>
         </div>
         <div class="navbar-end hidden lg:flex">
           <ul class="menu menu-horizontal p-0 gap-5">{navItems}</ul>
