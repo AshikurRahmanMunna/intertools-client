@@ -9,6 +9,7 @@ import {
 import auth from "../../firebase.init";
 import Loading from "../../components/Loading";
 import useToken from "../../hooks/useToken";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -39,7 +40,7 @@ const Register = () => {
   }
   return (
     <div className="min-h-screen mx-auto container flex items-center justify-center">
-      <div className="bg-secondary w-[800px] p-10 rounded-2xl flex items-center justify-center py-16">
+      <div className="bg-secondary w-[1050px] p-10 rounded-2xl flex items-center justify-center py-16">
         <div className="flex-1">
           <img className="mx-auto" src={banner} alt="login" />
         </div>
@@ -120,6 +121,7 @@ const Register = () => {
               Login
             </Link>
           </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

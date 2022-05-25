@@ -1,22 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import banner from "../../assets/images/login-banner.png";
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../components/Loading";
 import useToken from "../../hooks/useToken";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+    const [socialLoginError, setSocialLoginError] = useState();
   const [token] = useToken(user);
   const location = useLocation();
-  const from = location?.state?.from?.pathname || '/';
+  const from = location?.state?.from?.pathname || "/";
   const navigate = useNavigate();
   const {
     register,
@@ -24,22 +22,22 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   let errorElement;
-  if(error) {
-    errorElement = <p className="text-red-600">{error?.message}</p>
+  if (error) {
+    errorElement = <p className="text-red-600">{error?.message}</p>;
   }
-  if(loading) {
-    return <Loading></Loading>
+  if (loading) {
+    return <Loading></Loading>;
   }
   const handleLogin = (data) => {
-    const {email, password} = data;
+    const { email, password } = data;
     signInWithEmailAndPassword(email, password);
   };
-  if(token) {
-    navigate(from, {replace: true});
+  if (token) {
+    navigate(from, { replace: true });
   }
   return (
     <div className="min-h-screen mx-auto container flex items-center justify-center">
-      <div className="bg-secondary w-[800px] p-10 rounded-2xl flex items-center justify-center py-16">
+      <div className="bg-secondary w-[1050px] p-10 rounded-2xl flex items-center justify-center py-16">
         <div className="flex-1">
           <img className="mx-auto" src={banner} alt="login" />
         </div>
@@ -99,7 +97,14 @@ const Login = () => {
             />
           </form>
           {errorElement}
-          <p className="pt-3">Already have an account? <Link to="/register" className="text-primary">Register</Link></p>
+          <p className="text-red-500">{socialLoginError}</p>
+          <p className="pt-3">
+            Already have an account?{" "}
+            <Link to="/register" className="text-primary">
+              Register
+            </Link>
+          </p>
+          <SocialLogin setSocialLoginError={setSocialLoginError}></SocialLogin>
         </div>
       </div>
     </div>

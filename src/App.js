@@ -11,6 +11,8 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Login/Register";
 import Purchase from "./Pages/Purchase/Purchase";
 import RequireAuth from "./components/RequireAuth";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         </RequireAuth>}></Route>
       </Routes>
       <Footer />
+      <ToastContainer></ToastContainer>
     </>
   );
 }
