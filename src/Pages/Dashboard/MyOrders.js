@@ -20,8 +20,8 @@ const MyOrders = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  if(MyOrders.length < 1) {
-    return <h2 className="text-3xl mt-12">You haven't ordered any tools yet 😕😕.</h2>
+  if(myOrders.length < 1) {
+    return <h2 className="text-2xl mt-12">You haven't ordered any tools yet 😕😕.</h2>
   }
   return (
     <div>

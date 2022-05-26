@@ -51,7 +51,7 @@ const Register = () => {
             </Link>
             <h3 className="text-3xl">Register</h3>
           </div>
-          <form onSubmit={handleSubmit(handleRegister)}>
+          <form autoComplete="off" onSubmit={handleSubmit(handleRegister)}>
             <input
               placeholder="Name"
               class="input w-full block mb-3"
@@ -116,7 +116,7 @@ const Register = () => {
           </form>
           {errorElement}
           <p className="pt-3">
-            Don't have an account?{" "}
+            Already Have an Account?{" "}
             <Link to="/login" className="text-primary">
               Login
             </Link>

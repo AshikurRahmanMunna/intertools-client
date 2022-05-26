@@ -99,7 +99,7 @@ const Login = () => {
           {errorElement}
           <p className="text-red-500">{socialLoginError}</p>
           <p className="pt-3">
-            Already have an account?{" "}
+            Don't Have an Account?{" "}
             <Link to="/register" className="text-primary">
               Register
             </Link>

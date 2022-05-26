@@ -6,6 +6,7 @@ const useToken = (user) => {
   useEffect(() => {
     const currentUser = {
       email: user?.user?.email,
+      name: user?.user?.displayName
     };
     if (user) {
       axios
