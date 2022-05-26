@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import axiosPrivate from "../api/axiosPrivate";
 import auth from "../firebase.init";
-import Loading from "./Loading";
 
 const Navbar = () => {
   const [white, setWhite] = useState(false);
@@ -13,9 +12,9 @@ const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
   const location = useLocation();
 
-  const { data: admin, isLoading } = useQuery("admin", () => {
+  const { data: admin } = useQuery("admin", () => {
     return axiosPrivate
-      .get(`http://localhost:5000/admin/${user.email}`)
+      .get(`http://localhost:5000/admin/${user?.email}`)
       .then((res) => res.data.isAdmin);
   });
   const changeNavbarColor = () => {
@@ -47,7 +46,7 @@ const Navbar = () => {
       </li>
       {user && (
         <li>
-          <NavLink to={admin ? "/dashboard/manageOrders" : '/dashboard/myOrders'}>Dashboard</NavLink>
+          <NavLink to={admin ? "/dashboard/myProfile" : '/dashboard/myOrders'}>Dashboard</NavLink>
         </li>
       )}
       {user ? (

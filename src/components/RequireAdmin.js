@@ -19,7 +19,7 @@ const RequireUserOnly = ({ children }) => {
         return <Loading></Loading>
     }
 
-    if(admin){
+    if(!admin){
         signOut(auth);
         localStorage.removeItem('accessToken');
         return <Navigate to="/" state={{ from: location }} replace></Navigate>

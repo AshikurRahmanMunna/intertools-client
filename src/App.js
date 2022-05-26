@@ -19,6 +19,7 @@ import Payment from "./Pages/Dashboard/Payment";
 import AddReview from "./Pages/Dashboard/AddReview";
 import MyProfile from "./Pages/Dashboard/MyProfile";
 import RequireUserOnly from "./components/RequireUserOnly";
+import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
 
 function App() {
   return (
@@ -73,6 +74,14 @@ function App() {
             element={
               <RequireAuth>
                 <MyProfile></MyProfile>
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="makeAdmin"
+            element={
+              <RequireAuth>
+                <MakeAdmin></MakeAdmin>
               </RequireAuth>
             }
           ></Route>
