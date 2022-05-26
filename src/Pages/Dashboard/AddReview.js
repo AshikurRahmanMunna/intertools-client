@@ -21,7 +21,7 @@ const AddReview = () => {
       name: displayName,
       ...data,
     };
-    axiosPrivate.post("http://localhost:5000/reviews", review).then((res) => {
+    axiosPrivate.post("https://afternoon-journey-16786.herokuapp.com/reviews", review).then((res) => {
       if (res.data.acknowledged === true) {
         toast.success("Review Added Successfully", {
           position: "top-right",

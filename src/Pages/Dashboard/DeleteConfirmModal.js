@@ -5,7 +5,7 @@ import axiosPrivate from "../../api/axiosPrivate";
 const DeleteConfirmModal = ({deletingTool, setDeletingTool, refetch}) => {
   const {name, _id} = deletingTool;
   const handleDelete = () => {
-    axiosPrivate.delete(`http://localhost:5000/order/${_id}`)
+    axiosPrivate.delete(`https://afternoon-journey-16786.herokuapp.com/order/${_id}`)
     .then(res => {
       if(res.data.acknowledged === true) {
         toast.success("Order deleted successfully", {

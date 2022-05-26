@@ -7,7 +7,7 @@ import MakeAdminRow from "./MakeAdminRow";
 const MakeAdmin = () => {
   const { data: users, isLoading, refetch } = useQuery("users", () => {
     return axiosPrivate
-      .get("http://localhost:5000/user")
+      .get("https://afternoon-journey-16786.herokuapp.com/user")
       .then((res) => res.data);
   });
   if(isLoading) {

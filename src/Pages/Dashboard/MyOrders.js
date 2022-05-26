@@ -14,7 +14,7 @@ const MyOrders = () => {
     refetch,
   } = useQuery("myOrders", () => {
     return axiosPrivate
-      .get(`http://localhost:5000/order/${user.email}`)
+      .get(`https://afternoon-journey-16786.herokuapp.com/order/${user.email}`)
       .then((res) => res.data);
   });
   if (isLoading) {

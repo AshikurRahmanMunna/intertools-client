@@ -2,14 +2,15 @@ import { data } from "autoprefixer";
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
+import Loading from "../../components/Loading";
 import Tool from "./Tool";
 
 const Tools = () => {
   const { data: tools, isLoading } = useQuery("tools", () =>
-    axios.get("http://localhost:5000/toolsByLimit?limit=6").then(toolsData => toolsData.data)
+    axios.get("https://afternoon-journey-16786.herokuapp.com/tools").then(toolsData => toolsData.data)
   );
   if(isLoading) {
-    return 'Loading';
+    return <Loading></Loading>;
   }
   return (
     <div className="my-6">

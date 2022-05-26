@@ -22,7 +22,7 @@ const MyProfile = () => {
     refetch,
   } = useQuery("user", () =>
     axiosPrivate
-      .get(`http://localhost:5000/user/${user.email}`)
+      .get(`https://afternoon-journey-16786.herokuapp.com/user/${user.email}`)
       .then((res) => res.data)
   );
   if (loading || isLoading) {
@@ -32,7 +32,7 @@ const MyProfile = () => {
   const handleUpdateInfo = (data, event) => {
     const newData = { addedInfo: true, ...data };
     axiosPrivate
-      .put(`http://localhost:5000/updateUser/${user.email}`, newData)
+      .put(`https://afternoon-journey-16786.herokuapp.com/updateUser/${user.email}`, newData)
       .then((res) => {
         if (res.data.acknowledged === true) {
           refetch();

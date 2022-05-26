@@ -29,7 +29,7 @@ const PurchaseForm = ({ user, moq, tool }) => {
       isPaid: false,
       transactionId: ''
     };
-    axiosPrivate.post("http://localhost:5000/order", order).then((res) => {
+    axiosPrivate.post("https://afternoon-journey-16786.herokuapp.com/order", order).then((res) => {
       if (res.data.acknowledged === true) {
         toast.success("Order placed successfully", {
           position: "top-right",

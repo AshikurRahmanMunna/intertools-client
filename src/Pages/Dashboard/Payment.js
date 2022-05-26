@@ -8,7 +8,7 @@ const Payment = () => {
   const { id } = useParams();
   const { data: tool, isLoading } = useQuery("payment", () =>
     axiosPrivate
-      .get(`http://localhost:5000/orderById/${id}`)
+      .get(`https://afternoon-journey-16786.herokuapp.com/orderById/${id}`)
       .then((res) => res.data)
   );
   if (isLoading) {

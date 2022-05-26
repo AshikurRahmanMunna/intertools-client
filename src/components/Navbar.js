@@ -7,7 +7,6 @@ import axiosPrivate from "../api/axiosPrivate";
 import auth from "../firebase.init";
 
 const Navbar = () => {
-  const [white, setWhite] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
   const [user, loading, error] = useAuthState(auth);
   const [admin, setAdmin] = useState(false);
@@ -15,35 +14,19 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname === "/login" || location.pathname === "/register") {
       setHideNavbar(true);
-    }
-     else {
+    } else {
       setHideNavbar(false);
     }
   }, [location]);
 
   useEffect(() => {
     axiosPrivate
-      .get(`http://localhost:5000/admin/${user?.email}`)
+      .get(`https://afternoon-journey-16786.herokuapp.com/admin/${user?.email}`)
       .then((res) => setAdmin(res.data.isAdmin));
   }, []);
 
   if (loading) {
     return;
-  }
-
-  const changeNavbarColor = () => {
-    if (location.pathname === "/") {
-      if (window.scrollY > 150) {
-        setWhite(true);
-      } else {
-        setWhite(false);
-      }
-    } else {
-      setWhite(true);
-    }
-  };
-  if(location.pathname === '/') {
-    window.addEventListener("scroll", changeNavbarColor);
   }
 
   const navItems = (
@@ -54,13 +37,11 @@ const Navbar = () => {
       <li>
         <NavLink to="/portfolio">My Portfolio</NavLink>
       </li>
-      {user && (
         <li>
-          <NavLink to={admin ? "/dashboard/myProfile" : "/dashboard/myOrders"}>
+          <NavLink to="/dashboard">
             Dashboard
           </NavLink>
         </li>
-      )}
       {user ? (
         <button
           onClick={() => {
@@ -83,9 +64,7 @@ const Navbar = () => {
     <div
       class={`navbar z-50 bg-base-100 ${
         hideNavbar && "hidden"
-      } fixed duration-500 top-0 ${
-        white ? "bg-white text-black" : "bg-transparent text-white"
-      } z-10`}
+      } fixed duration-500 top-0 bg-white text-black`}
     >
       <div className="container mx-auto">
         <div class="navbar-start">
@@ -124,25 +103,25 @@ const Navbar = () => {
           <ul class="menu menu-horizontal p-0 gap-5">{navItems}</ul>
         </div>
         <div className="navbar-end text-right lg:hidden md:hidden">
-        <label
-          for="dashboard-drawer"
-          class="btn btn-primary drawer-button lg:hidden"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <label
+            for="dashboard-drawer"
+            class="btn btn-primary drawer-button lg:hidden"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h8m-8 6h16"
-            />
-          </svg>
-        </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
         </div>
       </div>
     </div>

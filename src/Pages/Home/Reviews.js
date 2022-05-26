@@ -45,7 +45,7 @@ const Reviews = () => {
   };
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/reviews").then((res) => {
+    axios.get("https://afternoon-journey-16786.herokuapp.com/reviews").then((res) => {
       setReviews(res.data);
     });
   }, []);

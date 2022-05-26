@@ -15,7 +15,7 @@ const Purchase = () => {
     data: tool,
     isLoading,
   } = useQuery("tool", () =>
-    axios.get(`http://localhost:5000/tools/${id}`).then((res) => res.data)
+    axios.get(`https://afternoon-journey-16786.herokuapp.com/tools/${id}`).then((res) => res.data)
   );
   if (isLoading) {
     return <Loading></Loading>;

@@ -36,7 +36,7 @@ const AddProduct = () => {
             availableQuantity: parseInt(data.availableQuantity),
             addedBy: user.email
           };
-          axiosPrivate.post('http://localhost:5000/tools', tool)
+          axiosPrivate.post('https://afternoon-journey-16786.herokuapp.com/tools', tool)
             .then((data) => {
               if (data.insertedId) {
                 toast.success("Order placed successfully", {
