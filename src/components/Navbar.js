@@ -17,6 +17,11 @@ const Navbar = () => {
       <li>
         <Link to="/#tools">Tools</Link>
       </li>
+      {
+        user && <li>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </li>
+      }
       {user ? (
         <button
           onClick={() => {
@@ -32,6 +37,7 @@ const Navbar = () => {
           <NavLink to="/login">Login</NavLink>
         </li>
       )}
+      
     </>
   );
   const changeNavbarColor = () => {
@@ -57,7 +63,7 @@ const Navbar = () => {
   window.addEventListener("scroll", changeNavbarColor);
   return (
     <div
-      class={`navbar bg-base-100 ${
+      class={`navbar z-50 bg-base-100 ${
         hideNavbar && "hidden"
       } fixed duration-500 top-0 ${
         white ? "bg-white text-black" : "bg-transparent text-white"

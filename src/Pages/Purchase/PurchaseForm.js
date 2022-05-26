@@ -27,9 +27,11 @@ const PurchaseForm = ({ user, moq, tool }) => {
       address,
       phone,
       email,
+      isPaid: false,
+      transactionId: ''
     };
     axiosPrivate.post("http://localhost:5000/order", order).then((res) => {
-      if (res.data.result.acknowledged === true) {
+      if (res.data.acknowledged === true) {
         toast.success("Order placed successfully", {
           position: "top-right",
           autoClose: 5000,
