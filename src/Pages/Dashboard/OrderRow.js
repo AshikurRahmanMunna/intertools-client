@@ -54,7 +54,6 @@ const OrderRow = ({ order, index, refetch }) => {
         <DeleteConfirmModal
           refetch={refetch}
           deletingTool={deletingTool}
-          deletingProduct={deletingTool}
         ></DeleteConfirmModal>
       )}
     </tr>

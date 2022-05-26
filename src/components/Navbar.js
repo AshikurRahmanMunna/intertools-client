@@ -37,11 +37,11 @@ const Navbar = () => {
       <li>
         <NavLink to="/portfolio">My Portfolio</NavLink>
       </li>
+      {user && (
         <li>
-          <NavLink to="/dashboard">
-            Dashboard
-          </NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
+      )}
       {user ? (
         <button
           onClick={() => {
@@ -50,7 +50,7 @@ const Navbar = () => {
           }}
           className="btn btn-secondary"
         >
-          Sign Out
+          {user.displayName}: Sign Out
         </button>
       ) : (
         <li>
@@ -99,7 +99,7 @@ const Navbar = () => {
             Inter<span className="text-primary font-lobster">tools</span>
           </Link>
         </div>
-        <div class="navbar-end hidden lg:flex">
+        <div class="navbar-end w-full hidden lg:flex">
           <ul class="menu menu-horizontal p-0 gap-5">{navItems}</ul>
         </div>
         <div className="navbar-end text-right lg:hidden md:hidden">

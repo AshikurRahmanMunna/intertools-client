@@ -22,6 +22,9 @@ import MyProfile from "./Pages/Dashboard/MyProfile";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
+import ManageProducts from "./Pages/Dashboard/ManageProducts";
+import ManageAllOrders from "./Pages/Dashboard/ManageAllOrders";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -96,7 +99,24 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+          <Route
+            path="manageProducts"
+            element={
+              <RequireAuth>
+                <ManageProducts></ManageProducts>
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="manageOrders"
+            element={
+              <RequireAuth>
+                <ManageAllOrders></ManageAllOrders>
+              </RequireAuth>
+            }
+          ></Route>
         </Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer />
       <ToastContainer></ToastContainer>

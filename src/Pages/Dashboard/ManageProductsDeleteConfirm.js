@@ -2,13 +2,13 @@ import React from "react";
 import { toast } from "react-toastify";
 import axiosPrivate from "../../api/axiosPrivate";
 
-const DeleteConfirmModal = ({deletingTool, refetch}) => {
+const ManageProductsDeleteConfirm = ({deletingTool, refetch}) => {
   const {name, _id} = deletingTool;
   const handleDelete = () => {
-    axiosPrivate.delete(`https://afternoon-journey-16786.herokuapp.com/order/${_id}`)
+    axiosPrivate.delete(`https://afternoon-journey-16786.herokuapp.com/tools/${_id}`)
     .then(res => {
       if(res.data.acknowledged === true) {
-        toast.success("Order deleted successfully", {
+        toast.success("Tool deleted successfully", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -36,26 +36,23 @@ const DeleteConfirmModal = ({deletingTool, refetch}) => {
   }
   return (
     <div>
-      {/* <label for="my-modal-3" class="btn modal-button">
-        open modal
-      </label> */}
-      <input type="checkbox" id="delete-confirm-modal" class="modal-toggle" />
+      <input type="checkbox" id="manage-products-delete-confirm-modal" class="modal-toggle" />
       <div class="modal">
         <div class="modal-box z-50 relative">
           <label
-            for="delete-confirm-modal"
+            for="manage-products-delete-confirm-modal"
             class="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
           <h3 class="text-lg font-bold">
-            Do you really want to cancel order: {name}
+            Do you really want to Delete Tool: {name}
           </h3>
           <p class="py-4">
             This can't be undone.
           </p>
           <div className="modal-action">
-            <button onClick={handleDelete} className="btn btn-error">Cancel</button>
+            <button onClick={handleDelete} className="btn btn-error">Delete</button>
           </div>
         </div>
       </div>
@@ -63,4 +60,4 @@ const DeleteConfirmModal = ({deletingTool, refetch}) => {
   );
 };
 
-export default DeleteConfirmModal;
+export default ManageProductsDeleteConfirm;

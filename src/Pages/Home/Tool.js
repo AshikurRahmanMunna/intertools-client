@@ -25,9 +25,9 @@ const Tool = ({ tool }) => {
             {price}/{unit}
           </span>
         </p>
-        <p>MOQ:{moq}</p>
+        <p>Minimum Order Quantity: {moq}</p>
         <p>
-          Available: {availableQuantity}
+          Available Quantity: {availableQuantity}
           {unit}
         </p>
         <div class="card-actions justify-end">
