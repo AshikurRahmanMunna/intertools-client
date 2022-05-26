@@ -18,6 +18,7 @@ import MyOrders from "./Pages/Dashboard/MyOrders";
 import Payment from "./Pages/Dashboard/Payment";
 import AddReview from "./Pages/Dashboard/AddReview";
 import MyProfile from "./Pages/Dashboard/MyProfile";
+import RequireUserOnly from "./components/RequireUserOnly";
 
 function App() {
   return (
@@ -44,11 +45,11 @@ function App() {
           }
         >
           <Route
-            index
+            path="myOrders"
             element={
-              <RequireAuth>
+              <RequireUserOnly>
                 <MyOrders></MyOrders>
-              </RequireAuth>
+              </RequireUserOnly>
             }
           ></Route>
           <Route
@@ -62,9 +63,9 @@ function App() {
           <Route
             path="addReview"
             element={
-              <RequireAuth>
+              <RequireUserOnly>
                 <AddReview></AddReview>
-              </RequireAuth>
+              </RequireUserOnly>
             }
           ></Route>
           <Route

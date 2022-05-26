@@ -1,14 +1,42 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useQuery } from "react-query";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import axiosPrivate from "../api/axiosPrivate";
 import auth from "../firebase.init";
+import Loading from "./Loading";
 
 const Navbar = () => {
   const [white, setWhite] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
-  const location = useLocation();
   const [user, loading, error] = useAuthState(auth);
+  const location = useLocation();
+
+  const { data: admin, isLoading } = useQuery("admin", () => {
+    return axiosPrivate
+      .get(`http://localhost:5000/admin/${user.email}`)
+      .then((res) => res.data.isAdmin);
+  });
+  const changeNavbarColor = () => {
+    if (location.pathname === "/") {
+      if (window.scrollY > 150) {
+        setWhite(true);
+      } else {
+        setWhite(false);
+      }
+    } else {
+      setWhite(true);
+    }
+  };
+  useEffect(() => {
+    if (location.pathname === "/login" || location.pathname === "/register") {
+      setHideNavbar(true);
+    } else {
+      setHideNavbar(false);
+    }
+  }, [location]);
+  window.addEventListener("scroll", changeNavbarColor);
   const navItems = (
     <>
       <li>
@@ -17,11 +45,11 @@ const Navbar = () => {
       <li>
         <Link to="/#tools">Tools</Link>
       </li>
-      {
-        user && <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
-      }
+      {user && (
+        <li>
+          <NavLink to={admin ? "/dashboard/manageOrders" : '/dashboard/myOrders'}>Dashboard</NavLink>
+        </li>
+      )}
       {user ? (
         <button
           onClick={() => {
@@ -37,30 +65,9 @@ const Navbar = () => {
           <NavLink to="/login">Login</NavLink>
         </li>
       )}
-      
     </>
   );
-  const changeNavbarColor = () => {
-    if (location.pathname === "/") {
-      if (window.scrollY > 150) {
-        setWhite(true);
-      } else {
-        setWhite(false);
-      }
-    }
-    else {
-      setWhite(true);
-    }
-  };
 
-  useEffect(() => {
-    if (location.pathname === "/login" || location.pathname === "/register") {
-      setHideNavbar(true);
-    } else {
-      setHideNavbar(false);
-    }
-  }, [location]);
-  window.addEventListener("scroll", changeNavbarColor);
   return (
     <div
       class={`navbar z-50 bg-base-100 ${
