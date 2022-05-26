@@ -24,7 +24,7 @@ const Banner = () => {
           />
           <div>
             <h1
-              class="text-4xl font-bold leading-3"
+              class="text-4xl font-bold lg:leading-3"
               data-aos="fade-right"
               data-aos-once="true"
               data-aos-delay="200"
@@ -34,7 +34,7 @@ const Banner = () => {
               <span className="text-primary">Intertools</span>
             </h1>
             <p
-              class="py-6 w-3/5"
+              class="py-6 lg:w-3/5"
               data-aos="fade-right"
               data-aos-delay="400"
               data-aos-duration="700"

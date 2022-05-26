@@ -11,6 +11,7 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Login/Register";
 import Purchase from "./Pages/Purchase/Purchase";
 import RequireAuth from "./components/RequireAuth";
+import RequireAdmin from "./components/RequireAdmin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./Pages/Dashboard/Dashboard";
@@ -18,8 +19,9 @@ import MyOrders from "./Pages/Dashboard/MyOrders";
 import Payment from "./Pages/Dashboard/Payment";
 import AddReview from "./Pages/Dashboard/AddReview";
 import MyProfile from "./Pages/Dashboard/MyProfile";
-import RequireUserOnly from "./components/RequireUserOnly";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
+import AddProduct from "./Pages/Dashboard/AddProduct";
+import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/portfolio" element={<MyPortfolio />}></Route>
         <Route
           path="/purchase/:id"
           element={
@@ -48,9 +51,9 @@ function App() {
           <Route
             path="myOrders"
             element={
-              <RequireUserOnly>
+              <RequireAuth>
                 <MyOrders></MyOrders>
-              </RequireUserOnly>
+              </RequireAuth>
             }
           ></Route>
           <Route
@@ -64,9 +67,9 @@ function App() {
           <Route
             path="addReview"
             element={
-              <RequireUserOnly>
+              <RequireAuth>
                 <AddReview></AddReview>
-              </RequireUserOnly>
+              </RequireAuth>
             }
           ></Route>
           <Route
@@ -82,6 +85,14 @@ function App() {
             element={
               <RequireAuth>
                 <MakeAdmin></MakeAdmin>
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="addProduct"
+            element={
+              <RequireAuth>
+                <AddProduct></AddProduct>
               </RequireAuth>
             }
           ></Route>

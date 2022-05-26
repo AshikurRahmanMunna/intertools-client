@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Navigate, useLocation } from "react-router-dom";
@@ -10,12 +10,15 @@ import Loading from "./Loading";
 const RequireUserOnly = ({ children }) => {
     const [user, loading, error] = useAuthState(auth);
     const location = useLocation();
+    const [admin, setAdmin] = useState(false);
 
-    const {data: admin, isLoading} = useQuery('admin', () => {
-        return axiosPrivate.get(`http://localhost:5000/admin/${user.email}`)
-        .then(res => res.data.isAdmin);
-    })
-    if(loading || isLoading){
+    useEffect(() => {
+      axiosPrivate
+        .get(`http://localhost:5000/admin/${user?.email}`)
+        .then((res) => setAdmin(res.data.isAdmin));
+    }, [user]);
+    
+    if(loading){
         return <Loading></Loading>
     }
 

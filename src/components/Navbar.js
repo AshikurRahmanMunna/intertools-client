@@ -10,13 +10,27 @@ const Navbar = () => {
   const [white, setWhite] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
   const [user, loading, error] = useAuthState(auth);
+  const [admin, setAdmin] = useState(false);
   const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/login" || location.pathname === "/register") {
+      setHideNavbar(true);
+    }
+     else {
+      setHideNavbar(false);
+    }
+  }, [location]);
 
-  const { data: admin } = useQuery("admin", () => {
-    return axiosPrivate
+  useEffect(() => {
+    axiosPrivate
       .get(`http://localhost:5000/admin/${user?.email}`)
-      .then((res) => res.data.isAdmin);
-  });
+      .then((res) => setAdmin(res.data.isAdmin));
+  }, []);
+
+  if (loading) {
+    return;
+  }
+
   const changeNavbarColor = () => {
     if (location.pathname === "/") {
       if (window.scrollY > 150) {
@@ -28,25 +42,23 @@ const Navbar = () => {
       setWhite(true);
     }
   };
-  useEffect(() => {
-    if (location.pathname === "/login" || location.pathname === "/register") {
-      setHideNavbar(true);
-    } else {
-      setHideNavbar(false);
-    }
-  }, [location]);
-  window.addEventListener("scroll", changeNavbarColor);
+  if(location.pathname === '/') {
+    window.addEventListener("scroll", changeNavbarColor);
+  }
+
   const navItems = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/#tools">Tools</Link>
+        <NavLink to="/portfolio">My Portfolio</NavLink>
       </li>
       {user && (
         <li>
-          <NavLink to={admin ? "/dashboard/myProfile" : '/dashboard/myOrders'}>Dashboard</NavLink>
+          <NavLink to={admin ? "/dashboard/myProfile" : "/dashboard/myOrders"}>
+            Dashboard
+          </NavLink>
         </li>
       )}
       {user ? (
@@ -96,17 +108,41 @@ const Navbar = () => {
             </label>
             <ul
               tabindex="0"
-              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 gap-5"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-screen gap-5 ml-[-8px]"
             >
               {navItems}
             </ul>
           </div>
-          <Link to="/" class="btn btn-ghost normal-case font-lobster text-3xl">
+          <Link
+            to="/"
+            class="btn btn-ghost normal-case font-lobster text-2xl  lg:text-3xl"
+          >
             Inter<span className="text-primary font-lobster">tools</span>
           </Link>
         </div>
         <div class="navbar-end hidden lg:flex">
           <ul class="menu menu-horizontal p-0 gap-5">{navItems}</ul>
+        </div>
+        <div className="navbar-end text-right lg:hidden md:hidden">
+        <label
+          for="dashboard-drawer"
+          class="btn btn-primary drawer-button lg:hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h8m-8 6h16"
+            />
+          </svg>
+        </label>
         </div>
       </div>
     </div>

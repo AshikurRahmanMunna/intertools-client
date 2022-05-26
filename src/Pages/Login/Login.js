@@ -37,7 +37,7 @@ const Login = () => {
   }
   return (
     <div className="min-h-screen mx-auto container flex items-center justify-center">
-      <div className="bg-secondary w-[1050px] p-10 rounded-2xl flex items-center justify-center py-16">
+      <div className="bg-secondary w-[1050px] p-10 rounded-2xl flex flex-col md:flex-row items-center justify-center py-16">
         <div className="flex-1">
           <img className="mx-auto" src={banner} alt="login" />
         </div>

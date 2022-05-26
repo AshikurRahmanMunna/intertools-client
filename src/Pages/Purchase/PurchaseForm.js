@@ -6,7 +6,6 @@ import axiosPrivate from "../../api/axiosPrivate";
 
 const PurchaseForm = ({ user, moq, tool }) => {
   const navigate = useNavigate();
-  const [disabled, setDisabled] = useState(false);
   const {
     register,
     handleSubmit,
@@ -78,13 +77,6 @@ const PurchaseForm = ({ user, moq, tool }) => {
           Quantity
         </label>
         <div className="flex justify-center">
-          {/* <button
-            type="button"
-            onClick={() => setQuantity(quantity - 1)}
-            className="btn btn-primary rounded-tr-none rounded-br-none"
-          >
-            -
-          </button> */}
           <input
             id="quantity"
             type="number"
@@ -95,13 +87,6 @@ const PurchaseForm = ({ user, moq, tool }) => {
             onChange={(event) => handleQuantity(event)}
             className="bg-white rounded-none input input-bordered w-1/6 text-center mb-3"
           />
-          {/* <button
-            type="button"
-            onClick={() => setQuantity(quantity + 1)}
-            className="btn btn-primary rounded-tl-none rounded-bl-none"
-          >
-            +
-          </button> */}
         </div>
         <label>
           {errors?.quantity?.type === "required" && (

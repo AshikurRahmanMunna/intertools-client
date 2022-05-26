@@ -15,6 +15,7 @@ const MyProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const {
     data: userProfile,
     isLoading,
@@ -129,13 +130,6 @@ const MyProfile = () => {
                   class="input w-full block mb-3"
                   {...register("education")}
                 />
-                {/* <label className="label pt-0 -mt-2 pb-3">
-                <span className="label-text-alt text-red-500">
-                  {errors.email?.type === "required" && "Email is required"}
-                  {errors.email?.type === "pattern" &&
-                    "Please provide a valid email"}
-                </span>
-              </label> */}
                 <input
                   placeholder="Location"
                   type="text"
