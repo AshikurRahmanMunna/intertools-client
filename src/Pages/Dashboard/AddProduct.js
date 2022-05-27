@@ -12,18 +12,22 @@ const AddProduct = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
   const imgBbKey = '9a2202cf2bf1f5f03a334ea153d39406';
 
   const handleAddProduct = async (data) => {
-    console.log(data)
-    const img = data.img[0];
+    const image = data.image[0];
     const formData = new FormData();
-    formData.append("img", img);
-    axios.post(`https://api.imgbb.com/1/upload?key=${imgBbKey}`, formData)
-      .then((result) => {
-        if (result.data.success) {
+    formData.append('image', image);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgBbKey}`, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then((result) => {
+        if (result.success) {
           const img = result.data.url;
           const tool = {
             name: data.name,
@@ -37,8 +41,8 @@ const AddProduct = () => {
           };
           axiosPrivate.post('https://afternoon-journey-16786.herokuapp.com/tools', tool)
             .then((data) => {
-              if (data.insertedId) {
-                toast.error("Order placed successfully", {
+              if (data.data.acknowledged) {
+                toast.success("Order placed successfully", {
                   position: "top-right",
                   autoClose: 5000,
                   hideProgressBar: true,
@@ -48,8 +52,9 @@ const AddProduct = () => {
                   progress: undefined,
                   theme: "dark",
                 });
+                reset();
               } else {
-                toast.success("Something Wen't wrong", {
+                toast.error("Something Wen't wrong", {
                   position: "top-right",
                   autoClose: 5000,
                   hideProgressBar: true,
@@ -88,7 +93,7 @@ const AddProduct = () => {
         <input
           type="file"
           class="input w-full block mb-3"
-          {...register("img", {
+          {...register("image", {
             required: {
               value: true,
               message: "Image is Required",
