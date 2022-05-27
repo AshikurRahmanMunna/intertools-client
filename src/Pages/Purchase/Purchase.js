@@ -61,7 +61,7 @@ const Purchase = () => {
           </div>
         </div>
       </div>
-      <PurchaseForm user={user} moq={tool.moq} tool={tool}></PurchaseForm>
+      <PurchaseForm user={user} tool={tool}></PurchaseForm>
     </div>
   );
 };

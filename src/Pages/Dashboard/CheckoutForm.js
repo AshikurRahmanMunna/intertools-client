@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axiosPrivate from "../../api/axiosPrivate";
-import axios from "axios";
 
 const CheckoutForm = ({ order }) => {
   const stripe = useStripe();
@@ -70,18 +69,13 @@ const CheckoutForm = ({ order }) => {
 
       //store payment on database
       const payment = {
-        transactionId: paymentIntent.id,
-        availableQuantity: parseInt(availableQuantity) - parseInt(quantity),
+        transactionId: paymentIntent.id
       };
       axiosPrivate
         .patch(`http://localhost:5000/order/${_id}`, payment)
         .then((data) => {
           setPaymentProcessing(false);
-          const newQuantity = availableQuantity - quantity;
-          console.log(quantity);
-          axiosPrivate.put(`http://localhost:5000/order/${_id}`, {
-            availableQuantity: availableQuantity - quantity,
-          });
+          console.log(data);
         });
     }
   };

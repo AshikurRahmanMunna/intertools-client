@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosPrivate from "../../api/axiosPrivate";
 
-const PurchaseForm = ({ user, moq, tool }) => {
+const PurchaseForm = ({ user, tool }) => {
   const navigate = useNavigate();
   const {
     register,
@@ -12,7 +12,7 @@ const PurchaseForm = ({ user, moq, tool }) => {
     formState: { errors },
   } = useForm();
   const handlePurchase = (data) => {
-    const { _id, img, name, description, price, unit } = tool;
+    const { _id, img, name, description, price, unit, availableQuantity, moq } = tool;
     const { email, userName, address, phone, quantity } = data;
     const order = {
       toolId: _id,
@@ -30,7 +30,7 @@ const PurchaseForm = ({ user, moq, tool }) => {
       transactionId: '',
       status: 'pending'
     };
-    axiosPrivate.post("https://afternoon-journey-16786.herokuapp.com/order", order).then((res) => {
+    axiosPrivate.post(`http://localhost:5000/order?toolId=${_id}&newQuantity=${availableQuantity - quantity}`, order).then((res) => {
       if (res.data.acknowledged === true) {
         toast.success("Order placed successfully", {
           position: "top-right",
@@ -48,7 +48,12 @@ const PurchaseForm = ({ user, moq, tool }) => {
   };
   const [quantityError, setQuantityError] = useState('');
 
-  const [quantity, setQuantity] = useState(moq);
+  
+  const [quantity, setQuantity] = useState(tool.moq);
+  useEffect(() => {
+    setQuantity('');
+    setQuantity(tool.moq);
+  }, [tool.moq])
 
   
   const handleQuantity = (event) => {

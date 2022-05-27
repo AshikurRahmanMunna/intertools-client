@@ -6,7 +6,7 @@ const OrderRow = ({ order, index, refetch }) => {
   const { _id, name, img, price, quantity, unit, isPaid, transactionId } = order;
   const navigate = useNavigate();
 
-  const [deletingTool, setDeletingTool] = useState();
+  const [deletingOrder, setDeletingOrder] = useState();
   return (
     <tr>
       <th>{index + 1}</th>
@@ -38,7 +38,7 @@ const OrderRow = ({ order, index, refetch }) => {
       <td>
         {!isPaid && !transactionId ? (
           <label
-            onClick={() => setDeletingTool(order)}
+            onClick={() => setDeletingOrder(order)}
             for="delete-confirm-modal"
             className="btn bg-red-500 w-full text-black border-none hover:bg-red-600"
           >
@@ -50,10 +50,10 @@ const OrderRow = ({ order, index, refetch }) => {
           </p>
         )}
       </td>
-      {deletingTool && (
+      {deletingOrder && (
         <DeleteConfirmModal
           refetch={refetch}
-          deletingTool={deletingTool}
+          deletingOrder={deletingOrder}
         ></DeleteConfirmModal>
       )}
     </tr>

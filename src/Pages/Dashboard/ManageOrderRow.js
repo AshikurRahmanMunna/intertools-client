@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axiosPrivate from "../../api/axiosPrivate";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
 const ManageOrderRow = ({ order, index, refetch }) => {
   const { _id, name, userName, price, quantity, status, isPaid } = order;
+  const [deletingOrder, setDeletingOrder] = useState();
   const setAsShipped = () => {
     axiosPrivate
       .put(`https://afternoon-journey-16786.herokuapp.com/order/${_id}`, {
-        status: 'shipped'
+        status: "shipped",
       })
       .then((res) => {
         if (res.data.acknowledged === true) {
@@ -45,20 +47,37 @@ const ManageOrderRow = ({ order, index, refetch }) => {
       <td>{quantity}</td>
       <td>
         {isPaid ? (
-          <p className="text-red-500">Unpaid</p>
-        ) : (
           <>
             {status === "pending" ? (
               <div className="flex items-center">
                 <p className="mr-2">Pending</p>
-                <button onClick={setAsShipped} className="btn btn-primary">Set As Shipped</button>
+                <button onClick={setAsShipped} className="btn btn-primary">
+                  Set As Shipped
+                </button>
               </div>
             ) : (
-              <p className="text-green-500">Shipped</p>
+              <p className="text-green-500 text-center">Shipped</p>
             )}
           </>
+        ) : (
+          <p className="text-red-500 text-center">Unpaid</p>
         )}
       </td>
+      <td>
+        <label
+          onClick={() => setDeletingOrder(order)}
+          for="delete-confirm-modal"
+          className="btn bg-red-500 w-full text-black border-none hover:bg-red-600"
+        >
+          Cancel
+        </label>
+      </td>
+      {deletingOrder && (
+        <DeleteConfirmModal
+          refetch={refetch}
+          deletingOrder={deletingOrder}
+        ></DeleteConfirmModal>
+      )}
     </tr>
   );
 };

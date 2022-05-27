@@ -28,6 +28,7 @@ const ManageAllOrders = () => {
               <th>Price</th>
               <th>Quantity</th>
               <th>Status</th>
+              <th>Action(Delete)</th>
             </tr>
           </thead>
           <tbody>

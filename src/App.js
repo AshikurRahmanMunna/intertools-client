@@ -11,7 +11,6 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Login/Register";
 import Purchase from "./Pages/Purchase/Purchase";
 import RequireAuth from "./components/RequireAuth";
-import RequireAdmin from "./components/RequireAdmin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./Pages/Dashboard/Dashboard";
