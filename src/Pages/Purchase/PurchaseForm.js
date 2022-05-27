@@ -27,7 +27,8 @@ const PurchaseForm = ({ user, moq, tool }) => {
       phone,
       email,
       isPaid: false,
-      transactionId: ''
+      transactionId: '',
+      status: 'pending'
     };
     axiosPrivate.post("https://afternoon-journey-16786.herokuapp.com/order", order).then((res) => {
       if (res.data.acknowledged === true) {

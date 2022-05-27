@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
 
 const Payment = () => {
   const { id } = useParams();
-  const { data: tool, isLoading } = useQuery("payment", () =>
+  const { data: order, isLoading } = useQuery("payment", () =>
     axiosPrivate
       .get(`https://afternoon-journey-16786.herokuapp.com/orderById/${id}`)
       .then((res) => res.data)
@@ -21,7 +21,7 @@ const Payment = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  const { name, price, quantity, description, unit } = tool;
+  const { name, price, quantity, description, unit } = order;
   return (
     <div className="flex min-h-screen items-center justify-center gap-5">
       <div class="card w-96 bg-base-200 shadow-xl">
@@ -38,7 +38,7 @@ const Payment = () => {
         <div class="card mt-4 w-96 bg-base-200 shadow-xl">
           <div class="card-body">
             <Elements stripe={stripePromise}>
-              <CheckoutForm tool={tool} />
+              <CheckoutForm order={order} />
             </Elements>
           </div>
         </div>

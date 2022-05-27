@@ -27,6 +27,7 @@ import ManageAllOrders from "./Pages/Dashboard/ManageAllOrders";
 import NotFound from "./components/NotFound";
 import DashboardIndex from "./Pages/Dashboard/DashboardIndex";
 import Blogs from "./Pages/Blogs/Blogs";
+import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCustomerChat";
 
 function App() {
   return (
@@ -129,6 +130,10 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
+      <MessengerCustomerChat
+        pageId="3142765042629941"
+        appId="104722065573692"
+      />
       <Footer />
       <ToastContainer></ToastContainer>
     </>
