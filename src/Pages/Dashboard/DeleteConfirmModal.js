@@ -8,13 +8,13 @@ const DeleteConfirmModal = ({ deletingOrder, refetch }) => {
   const [tool, setTool] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/tools/${toolId}`)
+      .get(`https://afternoon-journey-16786.herokuapp.com/tools/${toolId}`)
       .then((res) => setTool(res.data));
   }, [toolId]);
   const handleDelete = () => {
     axiosPrivate
       .delete(
-        `http://localhost:5000/order/${_id}?toolId=${toolId}&newQuantity=${
+        `https://afternoon-journey-16786.herokuapp.com/order/${_id}?toolId=${toolId}&newQuantity=${
           parseInt(tool?.availableQuantity) + parseInt(quantity)
         }`
       )

@@ -15,7 +15,7 @@ const CheckoutForm = ({ order }) => {
 
   useEffect(() => {
     axiosPrivate
-      .post("http://localhost:5000/create-payment-intent", {
+      .post("https://afternoon-journey-16786.herokuapp.com/create-payment-intent", {
         price: price * quantity,
       })
       .then((data) => {
@@ -72,7 +72,7 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id
       };
       axiosPrivate
-        .patch(`http://localhost:5000/order/${_id}`, payment)
+        .patch(`https://afternoon-journey-16786.herokuapp.com/order/${_id}`, payment)
         .then((data) => {
           setPaymentProcessing(false);
           console.log(data);
