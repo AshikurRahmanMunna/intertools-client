@@ -1,0 +1,5 @@
+Live site: https://intertools-1402d.firebaseapp.com/
+Client Side code: https://github.com/programming-hero-web-course1/manufacturer-website-client-side-AshikurRahmanMunna
+Server side Code: https://github.com/programming-hero-web-course1/manufacturer-website-server-side-AshikurRahmanMunna
+Admin Email: intertools.admin@gmail.com
+Admin password: intertools.admin@gmail.com

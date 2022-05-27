@@ -20,7 +20,7 @@ const Tool = ({ tool }) => {
         <h2 class="card-title">{name}</h2>
         <p>{description}</p>
         <p>
-          Price: BDT{" "}
+          Price: $
           <span className="text-primary">
             {price}/{unit}
           </span>

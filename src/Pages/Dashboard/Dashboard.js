@@ -19,40 +19,40 @@ const Dashboard = () => {
   return (
     <div class="drawer drawer-mobile mt-[64px]">
       <input id="dashboard-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content">
+      <div class="drawer-content mx-2 mb-12 rounded-2xl">
         <Outlet />
       </div>
-      <div class="drawer-side">
+      <div class="drawer-side mb-12">
         <label for="dashboard-drawer" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-200 rounded-2xl text-base-content border-r-2">
           {admin ? (
             <>
               <li>
-                <Link to="/dashboard/myProfile">My Profile</Link>
+                <NavLink to="/dashboard/myProfile">My Profile</NavLink>
               </li>
               <li>
-                <Link to="/dashboard/manageOrders">Manage All Orders</Link>
+                <NavLink to="/dashboard/manageOrders">Manage All Orders</NavLink>
               </li>
               <li>
-                <Link to="/dashboard/addProduct">Add A Product</Link>
+                <NavLink to="/dashboard/addProduct">Add A Product</NavLink>
               </li>
               <li>
-                <Link to="/dashboard/makeAdmin">Make Admin</Link>
+                <NavLink to="/dashboard/makeAdmin">Make Admin</NavLink>
               </li>
               <li>
-                <Link to="/dashboard/manageProducts">Manage Products</Link>
+                <NavLink to="/dashboard/manageProducts">Manage Products</NavLink>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link to="/dashboard/myOrders">My Orders</Link>
+                <NavLink to="/dashboard/myOrders">My Orders</NavLink>
               </li>
               <li>
-                <Link to="/dashboard/addReview">Add Review</Link>
+                <NavLink to="/dashboard/addReview">Add Review</NavLink>
               </li>
               <li>
-                <Link to="/dashboard/myProfile">My Profile</Link>
+                <NavLink to="/dashboard/myProfile">My Profile</NavLink>
               </li>
             </>
           )}

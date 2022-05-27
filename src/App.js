@@ -25,6 +25,7 @@ import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
 import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import ManageAllOrders from "./Pages/Dashboard/ManageAllOrders";
 import NotFound from "./components/NotFound";
+import DashboardIndex from "./Pages/Dashboard/DashboardIndex";
 
 function App() {
   return (
@@ -51,6 +52,14 @@ function App() {
             </RequireAuth>
           }
         >
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <DashboardIndex></DashboardIndex>
+              </RequireAuth>
+            }
+          ></Route>
           <Route
             path="myOrders"
             element={

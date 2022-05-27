@@ -21,8 +21,7 @@ const AddProduct = () => {
     const img = data.img[0];
     const formData = new FormData();
     formData.append("img", img);
-    const url = `https://api.imgbb.com/1/upload?key=${imgBbKey}`;
-    axios.post(url, formData)
+    axios.post(`https://api.imgbb.com/1/upload?key=${imgBbKey}`, formData)
       .then((result) => {
         if (result.data.success) {
           const img = result.data.url;
@@ -39,7 +38,7 @@ const AddProduct = () => {
           axiosPrivate.post('https://afternoon-journey-16786.herokuapp.com/tools', tool)
             .then((data) => {
               if (data.insertedId) {
-                toast.success("Order placed successfully", {
+                toast.error("Order placed successfully", {
                   position: "top-right",
                   autoClose: 5000,
                   hideProgressBar: true,
@@ -66,7 +65,7 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="bg-secondary p-10 rounded-2xl mt-5">
+    <div className="bg-secondary p-10 rounded-2xl">
       <h2 className="text-4xl text-center mb-4">
         Add <span className="text-primary">product</span>
       </h2>
