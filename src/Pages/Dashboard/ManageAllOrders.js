@@ -7,7 +7,7 @@ import ManageOrderRow from "./ManageOrderRow";
 const ManageAllOrders = () => {
   const { data: orders, isLoading, refetch } = useQuery("users", () => {
     return axiosPrivate
-      .get("http://localhost:5000/order")
+      .get("https://afternoon-journey-16786.herokuapp.com/order")
       .then((res) => res.data);
   });
   if(isLoading) {

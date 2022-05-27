@@ -6,7 +6,7 @@ const MyPortfolio = () => {
       <div className="container mx-auto">
         <div className="bg-secondary mb-3 mt-20 rounded-2xl p-10">
           <h2 className="text-5xl">Name: Ashikur Rahman Munna</h2>
-          <h4 className="text-2xl">Email: ashikurrahmanmunna3@gmail.com</h4>
+          <h4 className="lg:text-2xl mb-3">Email: ashikurrahmanmunna3@gmail.com</h4>
           <p>
             Educational Background: I am a student of Inter 1st year. My College
             Name is Narayanganj Technical School And College. My
